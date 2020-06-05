@@ -20,12 +20,31 @@ createHero = () => {
     return hero;
 }
 
+createFeed = () => {
+    let feed = [{
+        name: 'brian1',
+        comment: 'comment1',
+        date: new Date()
+    },{
+        name: 'brian2',
+        comment: 'comment2',
+        date: new Date()
+    },{
+        name: 'brian3',
+        comment: 'comment3',
+        date: new Date()
+    }];
+    return feed;
+}
+
 http.createServer(function (req,res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'application/json'});
     if (req.url === '/season') {
-        res.write(createSeason());
+        res.write(JSON.stringify(createSeason()));
     } else if (req.url === '/hero') {
-        res.write(createHero());
+        res.write(JSON.stringify(createHero()));
+    } else if (req.url === '/feed') {
+        res.write(JSON.stringify(createFeed()));
     }
     res.end();
 }).listen(8080);
